@@ -1,10 +1,8 @@
 package at.jit.service;
 
-import at.jit.helper.sequencegenerator.SequenceGenerator;
-import at.jit.helper.sequencegenerator.SequenceGeneratorImpl;
-import at.jit.constants.Converter;
-import at.jit.constants.DmnDataTypes;
-import at.jit.entity.CsvPojo;
+import static java.lang.String.format;
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.camunda.bpm.model.dmn.Dmn;
 import org.camunda.bpm.model.dmn.DmnModelInstance;
@@ -20,9 +18,11 @@ import org.camunda.bpm.model.dmn.instance.OutputEntry;
 import org.camunda.bpm.model.dmn.instance.Rule;
 import org.camunda.bpm.model.dmn.instance.Text;
 
-import java.util.List;
-
-import static java.lang.String.format;
+import at.jit.constants.Converter;
+import at.jit.constants.DmnDataTypes;
+import at.jit.entity.CsvPojo;
+import at.jit.helper.sequencegenerator.SequenceGenerator;
+import at.jit.helper.sequencegenerator.SequenceGeneratorImpl;
 
 public class DmnCreator {
     private DmnModelInstance modelInstance;
@@ -70,6 +70,8 @@ public class DmnCreator {
         definitions.setNamespace("http://camunda.org/schema/1.0/dmn");
         definitions.setName(Converter.DMN_NAME);
         definitions.setId(Converter.DMN_ID);
+        definitions.setAttributeValueNs(Converter.MODELER_NS, Converter.EXECUTION_PLATFORM_ATTRIBUTE_NAME, Converter.EXECUTION_PLATFORM);
+        definitions.setAttributeValueNs(Converter.MODELER_NS, Converter.EXECUTION_PLATFORM_VERSION_ATTRIBUTE_NAME, Converter.EXECUTION_PLATFORM_VERSION);
         modelInstance.setDefinitions(definitions);
 
         final Decision decision = modelInstance.newInstance(Decision.class);
