@@ -6,7 +6,8 @@ public enum DmnDataTypes {
     INTEGER("integer"),
     LONG("long"),
     DOUBLE("double"),
-    DATE("date");
+    DATE("date"),
+    NUMBER("number");
 
     private final String value;
 
